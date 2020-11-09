@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 5.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -20,17 +20,16 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="iOS/Java/Others/OC/Swift">
-<meta name="keywords" content="iOS&#x2F;Java&#x2F;Others">
+  <meta name="description" content="iOS&#x2F;Java&#x2F;Others&#x2F;OC&#x2F;Swift">
 <meta property="og:type" content="website">
 <meta property="og:title" content="SGA">
 <meta property="og:url" content="http://yoursite.com/index.html">
 <meta property="og:site_name" content="SGA">
-<meta property="og:description" content="iOS/Java/Others/OC/Swift">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:description" content="iOS&#x2F;Java&#x2F;Others&#x2F;OC&#x2F;Swift">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="SGA">
+<meta property="article:tag" content="iOS&#x2F;Java&#x2F;Others">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SGA">
-<meta name="twitter:description" content="iOS/Java/Others/OC/Swift">
 
 <link rel="canonical" href="http://yoursite.com/">
 
@@ -227,7 +226,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/05/oc-谈谈alloc/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/05/oc-%E8%B0%88%E8%B0%88alloc/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.jpg">
@@ -241,7 +240,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/09/05/oc-谈谈alloc/" class="post-title-link" itemprop="url">iOS底层之-谈谈alloc</a>
+            <a href="/2020/09/05/oc-%E8%B0%88%E8%B0%88alloc/" class="post-title-link" itemprop="url">iOS底层之-谈谈alloc</a>
         </h1>
 
         <div class="post-meta">
@@ -258,7 +257,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-21 06:18:41" itemprop="dateModified" datetime="2020-10-21T06:18:41Z">2020-10-21</time>
+                <time title="修改时间：2020-11-09 04:50:07" itemprop="dateModified" datetime="2020-11-09T04:50:07Z">2020-11-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -309,40 +308,39 @@
 </li>
 </ul>
 <h2 id="2-alloc-amp-init"><a href="#2-alloc-amp-init" class="headerlink" title="2. alloc &amp; init"></a>2. alloc &amp; init</h2><p>思考 =&gt; 极其简单的一道题，输出是否相同吗？？？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Person *p1 = [Person alloc];</span><br><span class="line">Person *p2 = [p1 init];</span><br><span class="line">Person *p3 = [p1 init];</span><br><span class="line">NSLog(@&quot;%@ - %p - %p&quot;,p1,p1,&amp;p1);</span><br><span class="line">NSLog(@&quot;%@ - %p - %p&quot;,p2,p2,&amp;p2);</span><br><span class="line">NSLog(@&quot;%@ - %p - %p&quot;,p3,p3,&amp;p3);</span><br></pre></td></tr></table></figure>
-
-<h3 id="alloc探究"><a href="#alloc探究" class="headerlink" title="alloc探究"></a>alloc探究</h3><p>tips: 符号断点、control + step into、Always show disassembly<br>方便你找到要看的源码出处在哪里 <a href="https://opensource.apple.com/tarballs/" target="_blank" rel="noopener">open source</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Person *p1 &#x3D; [Person alloc];</span><br><span class="line">Person *p2 &#x3D; [p1 init];</span><br><span class="line">Person *p3 &#x3D; [p1 init];</span><br><span class="line">NSLog(@&quot;%@ - %p - %p&quot;,p1,p1,&amp;p1);</span><br><span class="line">NSLog(@&quot;%@ - %p - %p&quot;,p2,p2,&amp;p2);</span><br><span class="line">NSLog(@&quot;%@ - %p - %p&quot;,p3,p3,&amp;p3);</span><br></pre></td></tr></table></figure>
+<h3 id="alloc探究"><a href="#alloc探究" class="headerlink" title="alloc探究"></a>alloc探究</h3><p>tips: 符号断点、control + step into、Always show disassembly<br>方便你找到要看的源码出处在哪里 <a target="_blank" rel="noopener" href="https://opensource.apple.com/tarballs/">open source</a></p>
 <p>当跟踪alloc方法时，选择跟踪的几个家伙的符号断点</p>
 <pre><code class="Objective-C">
-+ (id)alloc {
++ (id)alloc &#123;
     return _objc_rootAlloc(self);
-}
+&#125;
 
 _objc_rootAlloc(Class cls)
-{
+&#123;
     return callAlloc(cls, false/*checkNil*/, true/*allocWithZone*/);
-}
+&#125;
 
 // Call [cls alloc] or [cls allocWithZone:nil], with appropriate 
 // shortcutting optimizations.
 static ALWAYS_INLINE id
 callAlloc(Class cls, bool checkNil, bool allocWithZone=false)
-{
+&#123;
 #if __OBJC2__
     if (slowpath(checkNil &amp;&amp; !cls)) return nil;
-    if (fastpath(!cls-&gt;ISA()-&gt;hasCustomAWZ())) {
+    if (fastpath(!cls-&gt;ISA()-&gt;hasCustomAWZ())) &#123;
         return _objc_rootAllocWithZone(cls, nil);
-    }
+    &#125;
 #endif
 
     // No shortcuts available.
-    if (allocWithZone) {
+    if (allocWithZone) &#123;
         return ((id(*)(id, SEL, struct _NSZone *))objc_msgSend)(cls, @selector(allocWithZone:), nil);
-    }
+    &#125;
     return ((id(*)(id, SEL))objc_msgSend)(cls, @selector(alloc));
-}
+&#125;
 </code></pre>
-<p>当然，断点没有按照预期进行 =&gt; 注意编译器优化！！！</p>
+<p>当然，断点没有按照预期进行 =&gt; 注意编译器优化！！！<br><img src="/.com//optimizer" alt="clang的优化策略"></p>
 <p>objc_alloc<br>_objc_rootAlloc<br>callAlloc - 不调用 编译器优化<br>_objc_rootAllocWithZone<br>_class_creatInstanceFromZone</p>
 <p>cls-&gt;instanceSize<br>calloc<br>obj-&gt;initInstanceIsa</p>
 <p>开辟内存 -&gt;申请内存 -&gt; 绑定<br>注意 apple对缓存做了优化</p>
@@ -351,7 +349,7 @@ callAlloc(Class cls, bool checkNil, bool allocWithZone=false)
 <p>作业<br>alloc流程<br>NSObject为什么没进去 alloc流程？？</p>
 <p>init方法 - return self<br>提供相应的入口<br>new - callAlloc</p>
 <p>编译器优化<br>fastpath lowpath</p>
-<p><strong>builtin这个指令是gcc引入的，作用是允许程序员将最有可能执行的分支告诉编译器。这个指令的写法为：</strong>builtin_expect(EXP, N)<br>意思是：EXP==N的概率很大。</p>
+<p>__builtin这个指令是gcc引入的，作用是允许程序员将最有可能执行的分支告诉编译器。这个指令的写法为：__builtin_expect(EXP, N)<br>意思是：EXP==N的概率很大。</p>
 
       
     </div>
@@ -428,14 +426,11 @@ callAlloc(Class cls, bool checkNil, bool allocWithZone=false)
           <h2 id="Flutter-入门"><a href="#Flutter-入门" class="headerlink" title="Flutter 入门"></a>Flutter 入门</h2><h3 id="MacOS-Flutter环境搭建"><a href="#MacOS-Flutter环境搭建" class="headerlink" title="MacOS Flutter环境搭建"></a>MacOS Flutter环境搭建</h3><h4 id="更新环境变量"><a href="#更新环境变量" class="headerlink" title="更新环境变量"></a>更新环境变量</h4><p>这里注意对bash_profile的使用和其他终端的转换</p>
 <p>首先 记住你的Flutter路径 没有$HOME/.bash_profile 就创建一个<br>如果你使用的是zsh，终端启动时 ~/.bash_profile 将不会被加载，解决办法就是修改 ~/.zshrc ，在其中添加：source ~/.bash_profile<br>写入.bash_profile</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PUB_HOSTED_URL=https://pub.flutter-io.cn //国内用户需要设置</span><br><span class="line"><span class="built_in">export</span> FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn //国内用户需要设置</span><br><span class="line"><span class="built_in">export</span> PATH=PATH_TO_FLUTTER_GIT_DIRECTORY/flutter/bin:<span class="variable">$PATH</span> //注意替换为flutterk路径</span><br></pre></td></tr></table></figure>
-
 <p>运行 </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> <span class="variable">$HOME</span>/.bash_profile</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> <span class="variable">$HOME</span>/.bash_profile </span><br></pre></td></tr></table></figure>
 <p>刷新当前终端窗口</p>
 <p>检查 flutter/bin 是否已经在PATH中</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ echo $PATH</span><br></pre></td></tr></table></figure>
-
 <p>随后就可以 使用 idea、Android Studio、VSCode去配置 相关开发环境进行开发了</p>
 
       
@@ -456,7 +451,7 @@ callAlloc(Class cls, bool checkNil, bool allocWithZone=false)
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/08/hexo高级功能/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/08/hexo%E9%AB%98%E7%BA%A7%E5%8A%9F%E8%83%BD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.jpg">
@@ -470,7 +465,7 @@ callAlloc(Class cls, bool checkNil, bool allocWithZone=false)
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/08/08/hexo高级功能/" class="post-title-link" itemprop="url">hexo高级功能</a>
+            <a href="/2019/08/08/hexo%E9%AB%98%E7%BA%A7%E5%8A%9F%E8%83%BD/" class="post-title-link" itemprop="url">hexo高级功能</a>
         </h1>
 
         <div class="post-meta">
@@ -495,7 +490,7 @@ callAlloc(Class cls, bool checkNil, bool allocWithZone=false)
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术周边/" itemprop="url" rel="index"><span itemprop="name">技术周边</span></a>
+                  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%91%A8%E8%BE%B9/" itemprop="url" rel="index"><span itemprop="name">技术周边</span></a>
                 </span>
             </span>
 
@@ -529,7 +524,7 @@ callAlloc(Class cls, bool checkNil, bool allocWithZone=false)
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/08/hexo写作与进阶/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/08/hexo%E5%86%99%E4%BD%9C%E4%B8%8E%E8%BF%9B%E9%98%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.jpg">
@@ -543,7 +538,7 @@ callAlloc(Class cls, bool checkNil, bool allocWithZone=false)
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/08/08/hexo写作与进阶/" class="post-title-link" itemprop="url">hexo写作与进阶</a>
+            <a href="/2019/08/08/hexo%E5%86%99%E4%BD%9C%E4%B8%8E%E8%BF%9B%E9%98%B6/" class="post-title-link" itemprop="url">hexo写作与进阶</a>
         </h1>
 
         <div class="post-meta">
@@ -568,7 +563,7 @@ callAlloc(Class cls, bool checkNil, bool allocWithZone=false)
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术周边/" itemprop="url" rel="index"><span itemprop="name">技术周边</span></a>
+                  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%91%A8%E8%BE%B9/" itemprop="url" rel="index"><span itemprop="name">技术周边</span></a>
                 </span>
             </span>
 
@@ -584,7 +579,6 @@ callAlloc(Class cls, bool checkNil, bool allocWithZone=false)
 
       
           <h2 id="hexo写作"><a href="#hexo写作" class="headerlink" title="hexo写作"></a>hexo写作</h2><h3 id="1-hexo写作与创建文章"><a href="#1-hexo写作与创建文章" class="headerlink" title="1.hexo写作与创建文章"></a>1.hexo写作与创建文章</h3><h4 id="创建新文章"><a href="#创建新文章" class="headerlink" title="创建新文章"></a>创建新文章</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new [layout] &lt;title&gt;</span><br></pre></td></tr></table></figure>
-
 <p>当layout方式为page，效果为另起一页。<br>当layout方式为draft时，草稿文章，草稿文章也可以发布。<br>默认为post，存储在_posts中。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo publish [layout] &lt;title&gt;</span><br></pre></td></tr></table></figure>
 
@@ -611,7 +605,7 @@ callAlloc(Class cls, bool checkNil, bool allocWithZone=false)
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/24/站点规划/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/24/%E7%AB%99%E7%82%B9%E8%A7%84%E5%88%92/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.jpg">
@@ -625,7 +619,7 @@ callAlloc(Class cls, bool checkNil, bool allocWithZone=false)
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/07/24/站点规划/" class="post-title-link" itemprop="url">站点规划</a>
+            <a href="/2019/07/24/%E7%AB%99%E7%82%B9%E8%A7%84%E5%88%92/" class="post-title-link" itemprop="url">站点规划</a>
         </h1>
 
         <div class="post-meta">
@@ -684,7 +678,7 @@ callAlloc(Class cls, bool checkNil, bool allocWithZone=false)
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/24/搭建blog总结/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/24/%E6%90%AD%E5%BB%BAblog%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.jpg">
@@ -698,7 +692,7 @@ callAlloc(Class cls, bool checkNil, bool allocWithZone=false)
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/07/24/搭建blog总结/" class="post-title-link" itemprop="url">使用Hexo + github搭建blog（For Mac）</a>
+            <a href="/2019/07/24/%E6%90%AD%E5%BB%BAblog%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">使用Hexo + github搭建blog（For Mac）</a>
         </h1>
 
         <div class="post-meta">
@@ -723,7 +717,7 @@ callAlloc(Class cls, bool checkNil, bool allocWithZone=false)
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术周边/" itemprop="url" rel="index"><span itemprop="name">技术周边</span></a>
+                  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%91%A8%E8%BE%B9/" itemprop="url" rel="index"><span itemprop="name">技术周边</span></a>
                 </span>
             </span>
 
@@ -743,14 +737,13 @@ callAlloc(Class cls, bool checkNil, bool allocWithZone=false)
 
 <p>清除cache</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm cache clean -f</span><br></pre></td></tr></table></figure>
-
 <p>安装n<br>注意！！！<br>此处碰到权限问题的话，记得sudo或者文件权限修改<br>如果安装出现失败，则手动去将对应的node目录下文件夹先删掉</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm install -g n</span><br></pre></td></tr></table></figure>
 
 <p>安装node.js</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo n stable</span><br></pre></td></tr></table></figure>
 
-<h4 id="检查git版本"><a href="#检查git版本" class="headerlink" title="检查git版本"></a>检查git版本</h4><p>如还未安装git，请看<a href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git" target="_blank" rel="noopener">git安装</a></p>
+<h4 id="检查git版本"><a href="#检查git版本" class="headerlink" title="检查git版本"></a>检查git版本</h4><p>如还未安装git，请看<a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git">git安装</a></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git --version</span><br></pre></td></tr></table></figure>
 
 <p>安装hexo</p>
@@ -758,32 +751,24 @@ callAlloc(Class cls, bool checkNil, bool allocWithZone=false)
 
 <p>初始化<br>进入相应的文件夹</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init</span><br></pre></td></tr></table></figure>
-
 <p>安装npm</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm install</span><br></pre></td></tr></table></figure>
-
-<p>注意这个位置是存在于你的my_blog下的node_modules<br>此处进阶 <a href="https://docs.npmjs.com/" target="_blank" rel="noopener">玩转npm</a></p>
-<p> 生成本地文件，开启服务器，通过<a href="http://localhost:4000" target="_blank" rel="noopener">本地地址</a>查看博客（此地址可更改）</p>
+<p>注意这个位置是存在于你的my_blog下的node_modules<br>此处进阶 <a target="_blank" rel="noopener" href="https://docs.npmjs.com/">玩转npm</a></p>
+<p> 生成本地文件，开启服务器，通过<a target="_blank" rel="noopener" href="http://localhost:4000/">本地地址</a>查看博客（此地址可更改）</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g</span><br><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
-
 <h3 id="2-本地blog关联github"><a href="#2-本地blog关联github" class="headerlink" title="2.本地blog关联github"></a>2.本地blog关联github</h3><p>新建你的github仓库 yourName.github.io</p>
 <p>打开my_blog（本地文件的路径）下_config.yml，配置depoly</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repository: your github link</span><br><span class="line">branch: master</span><br><span class="line">（注意type、repository、branch后均有空格）</span><br></pre></td></tr></table></figure>
-
 <p>在myblog（本地文件的路径）下生成静态文件并上传到服务器</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g</span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
-
 <p>注意：如果报ERROR Deployer not found: git<br>执行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g</span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
-
 <p>若页面没有变<br>执行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br></pre></td></tr></table></figure>
-
 <h3 id="3-主题设定"><a href="#3-主题设定" class="headerlink" title="3.主题设定"></a>3.主题设定</h3><p>进入到本地对应目录下，执行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/iissnan/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
-
 <p>更改blog目录下_config.yml<br>theme :landscape改为next</p>
-<p>配置next主题：<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">官网</a><br>关于主题配置可以看官方文档<br>如果建立repo多位置远程协同注意next主题文件夹忽略问题</p>
+<p>配置next主题：<a target="_blank" rel="noopener" href="http://theme-next.iissnan.com/getting-started.html">官网</a><br>关于主题配置可以看官方文档<br>如果建立repo多位置远程协同注意next主题文件夹忽略问题</p>
 <p>设置语言<br>更改blog目录下_config.yml<br>language: zh-Hans<br>注意：关于语言设置 要看语言配置文件叫什么</p>
 
       
@@ -907,10 +892,10 @@ callAlloc(Class cls, bool checkNil, bool allocWithZone=false)
   </span>
   <span class="author" itemprop="copyrightHolder">SGA</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.1
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.1
   </div>
 
         
@@ -930,9 +915,17 @@ callAlloc(Class cls, bool checkNil, bool allocWithZone=false)
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 

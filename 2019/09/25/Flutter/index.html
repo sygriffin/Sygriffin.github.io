@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 5.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -20,18 +20,18 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Flutter 入门MacOS Flutter环境搭建更新环境变量这里注意对bash_profile的使用和其他终端的转换 首先 记住你的Flutter路径 没有$HOME/.bash_profile 就创建一个如果你使用的是zsh，终端启动时 ~/.bash_profile 将不会被加载，解决办法就是修改 ~/.zshrc ，在其中添加：source ~/.bash_profile写入.bash">
-<meta name="keywords" content="iOS&#x2F;Java&#x2F;Others">
+  <meta name="description" content="Flutter 入门MacOS Flutter环境搭建更新环境变量这里注意对bash_profile的使用和其他终端的转换 首先 记住你的Flutter路径 没有$HOME&#x2F;.bash_profile 就创建一个如果你使用的是zsh，终端启动时 ~&#x2F;.bash_profile 将不会被加载，解决办法就是修改 ~&#x2F;.zshrc ，在其中添加：source ~&#x2F;.bash_profile写入.bash">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Flutter">
 <meta property="og:url" content="http://yoursite.com/2019/09/25/Flutter/index.html">
 <meta property="og:site_name" content="SGA">
-<meta property="og:description" content="Flutter 入门MacOS Flutter环境搭建更新环境变量这里注意对bash_profile的使用和其他终端的转换 首先 记住你的Flutter路径 没有$HOME/.bash_profile 就创建一个如果你使用的是zsh，终端启动时 ~/.bash_profile 将不会被加载，解决办法就是修改 ~/.zshrc ，在其中添加：source ~/.bash_profile写入.bash">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-10-21T02:14:57.364Z">
+<meta property="og:description" content="Flutter 入门MacOS Flutter环境搭建更新环境变量这里注意对bash_profile的使用和其他终端的转换 首先 记住你的Flutter路径 没有$HOME&#x2F;.bash_profile 就创建一个如果你使用的是zsh，终端启动时 ~&#x2F;.bash_profile 将不会被加载，解决办法就是修改 ~&#x2F;.zshrc ，在其中添加：source ~&#x2F;.bash_profile写入.bash">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-09-24T16:12:34.000Z">
+<meta property="article:modified_time" content="2020-10-21T02:14:57.364Z">
+<meta property="article:author" content="SGA">
+<meta property="article:tag" content="iOS&#x2F;Java&#x2F;Others">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Flutter">
-<meta name="twitter:description" content="Flutter 入门MacOS Flutter环境搭建更新环境变量这里注意对bash_profile的使用和其他终端的转换 首先 记住你的Flutter路径 没有$HOME/.bash_profile 就创建一个如果你使用的是zsh，终端启动时 ~/.bash_profile 将不会被加载，解决办法就是修改 ~/.zshrc ，在其中添加：source ~/.bash_profile写入.bash">
 
 <link rel="canonical" href="http://yoursite.com/2019/09/25/Flutter/">
 
@@ -211,14 +211,11 @@
         <h2 id="Flutter-入门"><a href="#Flutter-入门" class="headerlink" title="Flutter 入门"></a>Flutter 入门</h2><h3 id="MacOS-Flutter环境搭建"><a href="#MacOS-Flutter环境搭建" class="headerlink" title="MacOS Flutter环境搭建"></a>MacOS Flutter环境搭建</h3><h4 id="更新环境变量"><a href="#更新环境变量" class="headerlink" title="更新环境变量"></a>更新环境变量</h4><p>这里注意对bash_profile的使用和其他终端的转换</p>
 <p>首先 记住你的Flutter路径 没有$HOME/.bash_profile 就创建一个<br>如果你使用的是zsh，终端启动时 ~/.bash_profile 将不会被加载，解决办法就是修改 ~/.zshrc ，在其中添加：source ~/.bash_profile<br>写入.bash_profile</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PUB_HOSTED_URL=https://pub.flutter-io.cn //国内用户需要设置</span><br><span class="line"><span class="built_in">export</span> FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn //国内用户需要设置</span><br><span class="line"><span class="built_in">export</span> PATH=PATH_TO_FLUTTER_GIT_DIRECTORY/flutter/bin:<span class="variable">$PATH</span> //注意替换为flutterk路径</span><br></pre></td></tr></table></figure>
-
 <p>运行 </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> <span class="variable">$HOME</span>/.bash_profile</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> <span class="variable">$HOME</span>/.bash_profile </span><br></pre></td></tr></table></figure>
 <p>刷新当前终端窗口</p>
 <p>检查 flutter/bin 是否已经在PATH中</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ echo $PATH</span><br></pre></td></tr></table></figure>
-
 <p>随后就可以 使用 idea、Android Studio、VSCode去配置 相关开发环境进行开发了</p>
 
     </div>
@@ -235,11 +232,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/08/08/hexo高级功能/" rel="prev" title="hexo高级功能">
+    <a href="/2019/08/08/hexo%E9%AB%98%E7%BA%A7%E5%8A%9F%E8%83%BD/" rel="prev" title="hexo高级功能">
       <i class="fa fa-chevron-left"></i> hexo高级功能
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/09/05/oc-谈谈alloc/" rel="next" title="iOS底层之-谈谈alloc">
+    <a href="/2020/09/05/oc-%E8%B0%88%E8%B0%88alloc/" rel="next" title="iOS底层之-谈谈alloc">
       iOS底层之-谈谈alloc <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -301,7 +298,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Flutter-入门"><span class="nav-number">1.</span> <span class="nav-text">Flutter 入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MacOS-Flutter环境搭建"><span class="nav-number">1.1.</span> <span class="nav-text">MacOS Flutter环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#更新环境变量"><span class="nav-number">1.1.1.</span> <span class="nav-text">更新环境变量</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Flutter-%E5%85%A5%E9%97%A8"><span class="nav-number">1.</span> <span class="nav-text">Flutter 入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MacOS-Flutter%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">1.1.</span> <span class="nav-text">MacOS Flutter环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">更新环境变量</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -355,10 +352,10 @@
   </span>
   <span class="author" itemprop="copyrightHolder">SGA</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.1
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.1
   </div>
 
         
@@ -378,9 +375,17 @@
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
