@@ -257,7 +257,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-09 04:50:07" itemprop="dateModified" datetime="2020-11-09T04:50:07Z">2020-11-09</time>
+                <time title="修改时间：2020-11-09 04:56:07" itemprop="dateModified" datetime="2020-11-09T04:56:07Z">2020-11-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -340,7 +340,7 @@ callAlloc(Class cls, bool checkNil, bool allocWithZone=false)
     return ((id(*)(id, SEL))objc_msgSend)(cls, @selector(alloc));
 &#125;
 </code></pre>
-<p>当然，断点没有按照预期进行 =&gt; 注意编译器优化！！！<br><img src="/.com//optimizer" alt="clang的优化策略"></p>
+<p>当然，断点没有按照预期进行 =&gt; 注意编译器优化！！！<br><img src="/.com//optimizer.png" alt="clang的优化策略"></p>
 <p>objc_alloc<br>_objc_rootAlloc<br>callAlloc - 不调用 编译器优化<br>_objc_rootAllocWithZone<br>_class_creatInstanceFromZone</p>
 <p>cls-&gt;instanceSize<br>calloc<br>obj-&gt;initInstanceIsa</p>
 <p>开辟内存 -&gt;申请内存 -&gt; 绑定<br>注意 apple对缓存做了优化</p>
